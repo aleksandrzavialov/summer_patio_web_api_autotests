@@ -1,5 +1,4 @@
 from typing import Literal
-import dotenv
 import pydantic
 
 from summerpatio_web_api_autotests.utils import path
@@ -8,13 +7,14 @@ BrowserType = Literal['chrome', 'firefox']
 
 
 class Config(pydantic.BaseSettings):
-    context: Literal['local', 'test', 'stage'] = 'local'
+    #context: Literal['local', 'test', 'stage'] = 'local'
 
-    base_url: str = 'https://todomvc.com/examples/emberjs'
+    base_url: str = 'https://summer-patio-stage.gismenu.ru/'
     driver_name: BrowserType = 'chrome'
+    version: BrowserType = '100.0'
     hold_driver_at_exit: bool = False
-    window_width: int = 1024
-    window_height: int = 768
+    window_width: int = 1080
+    window_height: int = 1920
     timeout: float = 3.0
     headless: bool = False
 
@@ -36,7 +36,8 @@ dotenv.load_dotenv(Path.home().joinpath('.env.secrets').__str__())
 '''
 
 #config = Config(dotenv.find_dotenv(f'.env.{Config().context}'))
-config = Config(_env_file=path.relative_from_root(f'.env.{Config().context}'))
+#config = Config(_env_file=path.relative_from_root(f'.env.{Config().context}'))
+config = Config(_env_file=path.relative_from_root('.env'))
 '''
 # if you would keep .env file name for local context (instead of .env.local)
 context = Config().context
