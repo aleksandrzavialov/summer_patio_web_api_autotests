@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "summer-patio-web-api-autotests"
+version = "0.1.0"
+description = "UI and API autotests for Summer Patio"
+authors = ["Aleksandr Zavialov <aleksandr.zavialov@grse.de>"]
+readme = "README.md"
+packages = [{include = "summer_patio_web_api_autotests"}]
+
+[tool.poetry.dependencies]
+python = "3.11.2"
+pytest = ">=7.4.0"
+pydantic = ">=1.10.10"
+selene = ">=2.0.0rc2"
+allure-pytest = ">=2.13.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
