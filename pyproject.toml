@@ -7,9 +7,9 @@ readme = "README.md"
 packages = [{include = "summer_patio_web_api_autotests"}]
 
 [tool.poetry.dependencies]
-python = ">=3.10.5"
+python = "3.10.5"
 pytest = ">=7.4.0"
-pydantic = ">= 1.10.9"
+pydantic = "1.10.9"
 selene = ">=2.0.0rc2"
 allure-pytest = ">=2.13.2"
 
