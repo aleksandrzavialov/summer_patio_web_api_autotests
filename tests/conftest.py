@@ -12,8 +12,8 @@ from utils.allure import attach
 
 import project
 
-DEFAULT_BROWSER_VERSION = '100.0'
-DEFAULT_BROWSER = 'chrome'
+#DEFAULT_BROWSER_VERSION = '100.0'
+#DEFAULT_BROWSER = 'firefox'
 
 
 def pytest_addoption(parser):
@@ -84,7 +84,8 @@ def both_orientation(request):
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     browser.config.base_url = project.config.base_url
-    browser.config.driver = project.config.driver_name if project.config.driver_name else DEFAULT_BROWSER
+    #browser.config.driver_name = 'firefox'
+    browser.config.driver_name = project.config.driver_name if project.config.driver_name else DEFAULT_BROWSER
     browser.config.version = project.config.version if project.config.version else DEFAULT_BROWSER_VERSION
     browser.config.hold_driver_at_exit = project.config.hold_driver_at_exit
     browser.config.window_width = project.config.window_width
@@ -110,8 +111,7 @@ def browser_management():
             "enableVideo": True
         }
     }
-    options = ChromeOptions()
-    # if browser.driver.name == 'chrome' else FFOptions()
+    options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
     options.capabilities.update(selenoid_capabilities)
 
     login = os.getenv('SELENOID_LOGIN')

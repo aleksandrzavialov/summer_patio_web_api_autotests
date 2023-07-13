@@ -27,10 +27,9 @@ class TestsHomeScreen:
         with allure.step('Open main page and check the title'):
             browser.open('/')
             browser.should(have.title_containing('Летний дворик'))
-            time.sleep(3)
 
     def test_add_todos_and_complete_three(self, browser_management):
         with allure.step('Open main page and check the title'):
             browser.open('/')
             browser.should(have.title_containing('Летний дворик'))
-            time.sleep(2)
+            time.sleep(5)
