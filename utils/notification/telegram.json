@@ -1,6 +1,6 @@
 {
   "base": {
-    "project": "qa-guru-5-14",
+    "project": "qa-guru-5-26",
     "environment": "test env",
     "comment": "test comment",
     "reportLink": "",
@@ -10,8 +10,8 @@
     "enableChart": true
   },
   "telegram": {
-    "token": "6022777831:AAGHQtR4h6vKuHHIFhnEutgdHziMsuGR3ZU",
-    "chat": "-993533265",
+    "token": "6334468655:AAHxZUJFttp0C_o8XBmtEQtb6pXCHbGeGtE",
+    "chat": "-1001951053592",
     "replyTo": ""
   }
 }
