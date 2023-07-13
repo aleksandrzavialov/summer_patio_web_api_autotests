@@ -122,6 +122,6 @@ def browser_management():
     yield
     # attach.add_html(browser)
     # attach.add_logs(browser)
-    # attach.add_screenshot(browser)
+    attach.add_screenshot(browser)
     attach.add_video(browser)
     browser.quit()
