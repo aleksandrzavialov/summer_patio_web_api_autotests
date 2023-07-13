@@ -96,8 +96,10 @@ def browser_management():
         browser.config.driver_options = driver_options
 
     selenoid_capabilities = {
-        "browserName": browser.config.driver_name,
-        "browserVersion": browser.config.version,
+        #"browserName": browser.config.driver_name,
+        "browserName": 'chrome',
+        #"browserVersion": browser.config.version,
+        "browserVersion": '100.0',
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
