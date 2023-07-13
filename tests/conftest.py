@@ -120,8 +120,8 @@ def browser_management():
     browser.config.driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
 
     yield
-    attach.add_html(browser)
-    attach.add_logs(browser)
-    attach.add_screenshot(browser)
+    # attach.add_html(browser)
+    # attach.add_logs(browser)
+    # attach.add_screenshot(browser)
     attach.add_video(browser)
     browser.quit()
