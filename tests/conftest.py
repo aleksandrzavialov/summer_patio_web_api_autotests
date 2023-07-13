@@ -12,8 +12,14 @@ from utils.allure import attach
 
 import project
 
-DEFAULT_BROWSER = 'chrome'
 DEFAULT_BROWSER_VERSION = '100.0'
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser_version',
+        default='100.0'
+    )
 
 
 #     browser_name = get_option_browser_name
@@ -77,7 +83,7 @@ def both_orientation(request):
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     browser.config.base_url = project.config.base_url
-    browser.config.driver_name = project.config.driver_name if project.config.driver_name else DEFAULT_BROWSER
+    #browser.config.driver = project.config.driver_name if project.config.driver_name
     browser.config.version = project.config.version if project.config.version else DEFAULT_BROWSER_VERSION
     browser.config.hold_driver_at_exit = project.config.hold_driver_at_exit
     browser.config.window_width = project.config.window_width
@@ -97,19 +103,21 @@ def browser_management():
 
     selenoid_capabilities = {
         #"browserName": browser.config.driver_name,
-        "browserName": 'chrome',
+        "browserName": "chrome",
         #"browserVersion": browser.config.version,
-        "browserVersion": '100.0',
+        "browserVersion": "100.0",
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
         }
     }
+    options = ChromeOptions()
+    # if browser.driver.name == 'chrome' else FFOptions()
+    options.capabilities.update(selenoid_capabilities)
 
     login = os.getenv('SELENOID_LOGIN')
     password = os.getenv('SELENOID_PASSWORD')
-    options = ChromeOptions() if browser.driver.name == 'chrome' else FFOptions()
-    options.capabilities.update(selenoid_capabilities)
+
     browser.config.driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
 
     yield
