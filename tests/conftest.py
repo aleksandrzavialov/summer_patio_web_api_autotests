@@ -10,6 +10,8 @@ from selene.support.shared import browser
 from selenium import webdriver
 from utils.allure import attach
 
+from selenium import webdriver
+
 import project
 
 DEFAULT_BROWSER_VERSION = '100.0'
@@ -111,8 +113,12 @@ def browser_management():
             "enableVideo": True
         }
     }
+
+    mobile_emulation = {"deviceName": "Nexus 5"}
+
     options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
     options.capabilities.update(selenoid_capabilities)
+    options.add_experimental_option("mobileEmulation", mobile_emulation)
 
     login = os.getenv('SELENOID_LOGIN')
     password = os.getenv('SELENOID_PASSWORD')

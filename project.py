@@ -13,8 +13,8 @@ class Config(pydantic.BaseSettings):
     driver_name: BrowserType = 'chrome'
     version = '100.0'
     hold_driver_at_exit: bool = False
-    window_width: int = 480
-    window_height: int = 640
+    window_width: int = 1170
+    window_height: int = 2532
     timeout: float = 3.0
     headless: bool = False
 
