@@ -12,8 +12,8 @@ from utils.allure import attach
 
 import project
 
-#DEFAULT_BROWSER_VERSION = '100.0'
-#DEFAULT_BROWSER = 'firefox'
+DEFAULT_BROWSER_VERSION = '100.0'
+DEFAULT_BROWSER = 'chrome'
 
 
 def pytest_addoption(parser):
