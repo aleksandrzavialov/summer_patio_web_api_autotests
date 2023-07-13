@@ -3,7 +3,6 @@ import allure
 import pytest
 from selene import browser, have
 from allure_commons.types import Severity
-
 from summerpatio_web_api_autotests.data.devices import Device
 
 
