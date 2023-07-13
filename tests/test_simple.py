@@ -33,4 +33,4 @@ class TestsHomeScreen:
         with allure.step('Open main page and check the title'):
             browser.open('/')
             browser.should(have.title_containing('Летний дворик'))
-            time.sleep(20)
+            time.sleep(2)
