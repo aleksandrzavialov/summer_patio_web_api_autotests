@@ -104,7 +104,7 @@ def browser_management():
         browser.config.driver_options = driver_options
 
     selenoid_capabilities = {
-        "browserName": browser.config.driver,
+        "browserName": browser.config.driver_name,
         "browserVersion": browser.config.version,
         "selenoid:options": {
             "enableVNC": True,
