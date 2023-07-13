@@ -11,10 +11,10 @@ class Config(pydantic.BaseSettings):
 
     base_url: str = 'https://summer-patio-stage.gismenu.ru/'
     driver_name: BrowserType = 'chrome'
-    version: BrowserType = '100.0'
+    version = '100.0'
     hold_driver_at_exit: bool = False
-    window_width: int = 1080
-    window_height: int = 1920
+    window_width: int = 480
+    window_height: int = 640
     timeout: float = 3.0
     headless: bool = False
 

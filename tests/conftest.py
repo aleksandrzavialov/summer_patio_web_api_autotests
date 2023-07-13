@@ -1,7 +1,6 @@
 import os
 
 import pytest
-from selene import browser
 from dotenv import load_dotenv
 from summerpatio_web_api_autotests.data.devices import Device
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -115,5 +114,5 @@ def browser_management():
     attach.add_html(browser)
     attach.add_logs(browser)
     attach.add_screenshot(browser)
-    attach.add_screenshot(browser)
+    attach.add_video(browser)
     browser.quit()
