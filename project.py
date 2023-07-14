@@ -10,13 +10,17 @@ class Config(pydantic.BaseSettings):
     #context: Literal['local', 'test', 'stage'] = 'local'
 
     base_url: str = 'https://summer-patio-stage.gismenu.ru/'
-    driver_name: BrowserType = 'chrome'
-    version = '100.0'
+    driver_name: BrowserType = 'firefox'
+    version = '98.0'
     hold_driver_at_exit: bool = False
+    #window_width: int = 480
     window_width: int = 1170
+    #window_height: int = 640
     window_height: int = 2532
     timeout: float = 3.0
     headless: bool = False
+    safari_user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
+    chrome_device = 'Nexus 5'
 
 
 # if you want to have optional .env file (without `.context` suffix)

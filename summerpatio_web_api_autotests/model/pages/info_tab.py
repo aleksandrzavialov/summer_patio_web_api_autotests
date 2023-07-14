@@ -1,4 +1,5 @@
 from selene.support.shared import browser
+from selene import be, have, query
 
 
 class InfoTab:
@@ -7,7 +8,5 @@ class InfoTab:
         return self
 
     def check_if_tab_active(self):
-        num_of_elements = len(browser.all('.devider-list'))
-        #num_of_elements = len(browser.all('.work'))
-        assert num_of_elements >= 1
+        browser.all('.devider-list').should(have.size_greater_than(1))
         return self
