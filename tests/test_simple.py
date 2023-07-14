@@ -33,21 +33,23 @@ class TestsMainScreen:
         with allure.step('Click on Info tab'):
             application.info_tab.open_tab().check_if_tab_active()
 
-    def test_fixture(self, browser_management):
-        print(1)
-        # for specs in DeviceInfo.deviceList.values():
-        #     print(str(specs[0]))
-        #     print('UUU '+project.config.driver_name)
-        #     #print('ALL '+str(DeviceInfo.deviceList.values()))
-        #     match project.config.driver_name:
-        #         case 'chrome':
-        #             print('I AM CHROME')
-        #             if str(specs[0]) == 'Emulated':
-        #                 print('O LA LA: '+str(specs[1]))
-        #             # else:
-        #             # yield ['Skip on Chrome']
-        #         case 'firefox':
-        #             print('I AM FF')
-        #             if str(specs[0]) == 'NotEmulated':
-        #                 print('O LALA: '+str(specs[1]))
-
+    @allure.severity(Severity.BLOCKER)
+    @allure.title('Validate main page')
+    @pytest.mark.parametrize('browser_management', ["IPhone_14ProMax"], indirect=True)
+    def test_check_info_tab_gm_1165(self, browser_management):
+        with allure.step('Open main page, check title'):
+            browser.open('/')
+            browser.should(have.title_containing('Летний дворик'))
+        with allure.step('Check link to the agreement and agree with cookies'):
+            application.main_page.check_agreement()
+            application.main_page.agree_with_cookies()
+        with allure.step('Click on Info tab'):
+            application.info_tab.open_tab().check_if_tab_active()
+        with allure.step('Check address'):
+            application.info_tab.check_address()
+        with allure.step('Check working hours'):
+            application.info_tab.check_working_hours()
+        with allure.step('Check payment methods'):
+            application.info_tab.check_payment_methods()
+        with allure.step('Check phone numbers'):
+            application.info_tab.check_contacts()
