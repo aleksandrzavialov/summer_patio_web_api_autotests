@@ -1,7 +1,7 @@
 from datetime import date
 
 from selene.support.shared import browser
-from selene import be, have, query
+from selene import be, have
 from summerpatio_web_api_autotests.data.contacts import Contact
 from summerpatio_web_api_autotests.data.textings import Texting
 

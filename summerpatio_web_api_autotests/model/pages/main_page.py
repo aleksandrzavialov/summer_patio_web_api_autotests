@@ -1,4 +1,4 @@
-from selene import be, have, query
+from selene import be, have
 from selene.support.shared import browser
 from summerpatio_web_api_autotests.data.contacts import Contact
 from summerpatio_web_api_autotests.data.links import Link
@@ -39,4 +39,15 @@ class MainPage:
         browser.element('.logo').should(be.visible).should(have.attribute('width').value(Header.logo['width'])).\
             should(have.attribute('height').value(Header.logo['height']))
         return self
+
+    # def authorize_in_ui(self):
+    #     browser.element('.burger').should(be.visible).click()
+    #     browser.element('.modal-link').click()
+    #     browser.element('[class=google]').click()
+    #     browser.switch_to_next_tab()
+    #     browser.element('#identifierId').type(Contact.google_account.value[0])
+    #     browser.element('#identifierNext').click()
+    #     return self
+
+
 

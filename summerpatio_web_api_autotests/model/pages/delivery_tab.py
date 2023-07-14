@@ -1,4 +1,5 @@
 from selene.support.shared import browser
+from selene import have
 
 
 class DeliveryTab:
@@ -6,3 +7,7 @@ class DeliveryTab:
         num_of_elements = len(browser.all('.menu-list'))
         assert num_of_elements >= 1
         return self
+
+    def open_menu(self, menu_name: str = 'Меню доставка'):
+        browser.all('.menu-name_mobile').element_by(have.exact_text(menu_name)).click()
+
