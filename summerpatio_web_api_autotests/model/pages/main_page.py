@@ -3,8 +3,8 @@ from selene.support.shared import browser
 from summerpatio_web_api_autotests.data.contacts import Contact
 from summerpatio_web_api_autotests.data.links import Link
 from summerpatio_web_api_autotests.data.textings import Texting
-from summerpatio_web_api_autotests.model.components.burger_menu import Burger
-from summerpatio_web_api_autotests.model.components.header_menu import Header
+from summerpatio_web_api_autotests.model.components.burger import Burger
+from summerpatio_web_api_autotests.model.components.header import Header
 from datetime import date
 
 

@@ -65,7 +65,7 @@ class TestsMainScreen:
 
     @allure.severity(Severity.BLOCKER)
     @allure.title('Open Delivery Menu')
-    @pytest.mark.parametrize('browser_management', ["IPhone_14ProMax"], indirect=True)
+    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_opening_menu_gm_1163(self, browser_management):
         with allure.step('Open main page, check title'):
             browser.open('/')
