@@ -8,6 +8,7 @@ class Dish:
     mass: str
     price: str
     count: int = 0
+    total_amount: float = 0.0
 
 
 

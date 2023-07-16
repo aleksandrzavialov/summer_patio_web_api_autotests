@@ -54,13 +54,20 @@ class TestsMainScreen:
     @allure.severity(Severity.CRITICAL)
     @allure.title('Add a dish from menu')
     @pytest.mark.parametrize('browser_management', ["Nexus 5"], indirect=True)
-    def test_check_search_in_menu_gm_1185(self, browser_management):
+    def test_check_search_in_menu_gm_1183(self, browser_management):
         meat_dish = application.meat_dish_1
-
+        new_order = application.new_order
         with allure.step('Open main page, check title'):
             browser.open('/')
         with allure.step('Open delivery menu'):
             application.delivery_tab.open_menu()
         with allure.step('Find dish attributes'):
             application.menu_page.check_dish(meat_dish)
+        with allure.step('Add 1 dish to the cart'):
+            application.menu_page.add_to_cart(meat_dish)
+        with allure.step('Check order amount'):
+            assert application.new_order.calculate_amount(meat_dish) == meat_dish.total_amount
+
+
+
 

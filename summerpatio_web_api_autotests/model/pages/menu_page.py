@@ -1,15 +1,12 @@
 import time
-from gettext import gettext
-
 from selene.support.shared import browser
-from selene import be, have, command, query
+from selene import be, have, command
 from selenium.webdriver import Keys
-
 from summerpatio_web_api_autotests.model.components.dish import Dish
-from selenium import webdriver
+
 
 class MenuPage:
-    def check_menu_page(self,menu_name: str = 'Меню доставка', last_menu_group: str = 'Прочее'):
+    def check_menu_page(self, menu_name: str = 'Меню доставка', last_menu_group: str = 'Прочее'):
         browser.element('.items-title').should(have.text(menu_name))
         browser.element('.v-toolbar-items svg').should(be.clickable)
         browser.element('.search').should(be.clickable)
@@ -74,3 +71,34 @@ class MenuPage:
             browser.element('.btn-counter').should(have.exact_text('Добавить'))
         else:
             browser.element('.btn-counter').should(have.size(2))
+
+    def add_to_cart(self, dish: Dish, count: int = 1):
+        self.search_for_a_dish(dish)
+        if dish.count == 0:
+            for _ in range(count):
+                if _ == 0:
+                    browser.element('.btn-counter').click()
+                else:
+                    browser.element('.btn-counter:nth-of-type(2)').click()
+                dish.count += 1
+        else:
+            for _ in range(count):
+                browser.element('.btn-counter:nth-of-type(2)').click()
+            dish.count += 1
+        return dish.count
+
+    def delete_from_cart(self, dish: Dish, count: int = 1):
+        self.search_for_a_dish(dish)
+        for _ in range(count):
+            browser.element('.btn-counter:nth-of-type(1)').click()
+            dish.count -= 1
+
+    @staticmethod
+    def check_amount(dish: Dish):
+        total_price_of_dish = 0.0
+        for count in range(dish.count):
+            total_price_of_dish += float(dish.price.split(' ')[0])
+            dish.total_amount = total_price_of_dish
+
+
+
