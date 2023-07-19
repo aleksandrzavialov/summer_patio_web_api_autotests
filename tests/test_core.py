@@ -5,7 +5,7 @@ from selene import browser, have, be
 from allure_commons.types import Severity
 from summerpatio_web_api_autotests.model import application
 from summerpatio_web_api_autotests.model.components.burger import Burger
-from seleniumwire import webdriver
+from selenium import webdriver
 
 
 @allure.tag("ui", "web")
