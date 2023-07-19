@@ -63,36 +63,37 @@ def browser_management(request):
 
     match browser.config.driver_name:
         case 'chrome':
-            driver_options = webdriver.ChromeOptions() # comment for selenide
-            driver_options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) # comment for selenide
-            browser.config.driver_options = driver_options # comment for selenide
+            print(1)
+            # driver_options = webdriver.ChromeOptions() # comment for selenide
+            # driver_options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) # comment for selenide
+            # browser.config.driver_options = driver_options # comment for selenide
         case 'firefox':
 
-            browser.config.window_width = DeviceInfo.firefox_devices_dict.get(request.param)[0]# comment for selenide
-            browser.config.window_height = DeviceInfo.firefox_devices_dict.get(request.param)[1]# comment for selenide
+            # browser.config.window_width = DeviceInfo.firefox_devices_dict.get(request.param)[0]# comment for selenide
+            # browser.config.window_height = DeviceInfo.firefox_devices_dict.get(request.param)[1]# comment for selenide
 
             driver_options = webdriver.FirefoxOptions()
             driver_options.set_preference("general.useragent.override", project.config.safari_user_agent)
             browser.config.driver_options = driver_options
 
-    # options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
-    # options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) \
-    #     if browser.config.driver_name == 'chrome' else \
-    #     options.set_preference("general.useragent.override", project.config.safari_user_agent)
-    #
-    # login = os.getenv('SELENOID_LOGIN')
-    # password = os.getenv('SELENOID_PASSWORD')
-    #
-    # selenoid_capabilities = {
-    #     "browserName": browser.config.driver_name,
-    #     "browserVersion": browser.config.version,
-    #     "selenoid:options": {
-    #         "enableVNC": True,
-    #         "enableVideo": True
-    #     }
-    # }
-    # options.capabilities.update(selenoid_capabilities)
-    # browser.config.driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
+    options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
+    options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) \
+        if browser.config.driver_name == 'chrome' else \
+        options.set_preference("general.useragent.override", project.config.safari_user_agent)
+
+    login = os.getenv('SELENOID_LOGIN')
+    password = os.getenv('SELENOID_PASSWORD')
+
+    selenoid_capabilities = {
+        "browserName": browser.config.driver_name,
+        "browserVersion": browser.config.version,
+        "selenoid:options": {
+            "enableVNC": True,
+            "enableVideo": True
+        }
+    }
+    options.capabilities.update(selenoid_capabilities)
+    browser.config.driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
 
     yield
     attach.add_html(browser)
