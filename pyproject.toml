@@ -14,6 +14,7 @@ selene = ">=2.0.0rc2"
 allure-pytest = ">=2.13.2"
 jsonschema = ">=4.17.3"
 curlify = ">=2.2.1"
+selenium-wire =  ">=5.1.0"
 
 [build-system]
 requires = ["poetry-core"]
