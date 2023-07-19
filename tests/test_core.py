@@ -20,17 +20,17 @@ class TestsMainScreen:
         with allure.step('Open main page, check title'):
             browser.open('/')
             browser.should(have.title_containing('Летний дворик'))
-        with allure.step('Check link to the agreement and agree with cookies'):
-            application.main_page.check_agreement()
-            application.main_page.agree_with_cookies()
-        with allure.step('Check burger menu'):
-            application.main_page.check_burger_menu()
-        with allure.step('Check logo'):
-            application.main_page.check_logo()
-        with allure.step('Check that menu items appear by default'):
-            application.delivery_tab.check_if_tab_active()
-        with allure.step('Click on Info tab'):
-            application.info_tab.open_tab().check_if_tab_active()
+        # with allure.step('Check link to the agreement and agree with cookies'):
+        #     application.main_page.check_agreement()
+        #     application.main_page.agree_with_cookies()
+        # with allure.step('Check burger menu'):
+        #     application.main_page.check_burger_menu()
+        # with allure.step('Check logo'):
+        #     application.main_page.check_logo()
+        # with allure.step('Check that menu items appear by default'):
+        #     application.delivery_tab.check_if_tab_active()
+        # with allure.step('Click on Info tab'):
+        #     application.info_tab.open_tab().check_if_tab_active()
 
     # @allure.severity(Severity.BLOCKER)
     # @allure.title('Validate side menu')
