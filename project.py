@@ -10,8 +10,8 @@ class Config(pydantic.BaseSettings):
     #context: Literal['local', 'test', 'stage'] = 'local'
 
     base_url: str = 'https://summer-patio-stage.gismenu.ru/'
-    driver_name: BrowserType = 'chrome'
-    version = '100.0'
+    driver_name: BrowserType = 'firefox'
+    version = '98.0'
     hold_driver_at_exit: bool = False
     #window_width: int = 480
     window_width: int = 1170

@@ -10,7 +10,7 @@ from summerpatio_web_api_autotests.model import application
 @allure.tag("ui", "web")
 @allure.label('owner', 'Aleksandr Zavialov')
 @allure.feature('UI')
-@allure.story('Menu')
+@allure.story('Cart')
 class TestsMainScreen:
     @allure.severity(Severity.CRITICAL)
     @allure.title('Validate filtering of dishes')

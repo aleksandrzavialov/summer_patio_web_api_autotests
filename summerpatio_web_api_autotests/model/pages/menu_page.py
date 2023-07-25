@@ -73,7 +73,6 @@ class MenuPage:
             browser.element('.btn-counter').should(have.size(2))
 
     def add_to_cart(self, dish: Dish, count: int = 1):
-        self.search_for_a_dish(dish)
         if dish.count == 0:
             for _ in range(count):
                 if _ == 0:
@@ -88,7 +87,6 @@ class MenuPage:
         return dish.count
 
     def delete_from_cart(self, dish: Dish, count: int = 1):
-        self.search_for_a_dish(dish)
         for _ in range(count):
             browser.element('.btn-counter:nth-of-type(1)').click()
             dish.count -= 1
@@ -99,6 +97,65 @@ class MenuPage:
         for count in range(dish.count):
             total_price_of_dish += float(dish.price.split(' ')[0])
             dish.total_amount = total_price_of_dish
+
+    def place_order(self):
+        browser.element('.order').click()
+        return self
+
+    def open_dish_card(self, dish: Dish):
+        browser.element('.image').click()
+        browser.element('.title_link').should(have.text(dish.group))
+        browser.element('.image').should(be.visible)
+        browser.element('.title_link').should(have.text(dish.group))
+        browser.element('.measure_subtitle').should(have.text(dish.mass))
+        browser.element('.router-link-active span').should(have.text('К меню'))
+        browser.element('a[href="/menu"] span').should(have.text('К заведению'))
+        browser.element('.count').should(have.text('1'))
+        browser.element('.add-action button').should(be.visible)
+        browser.all('button svg').should(have.size(2))
+        browser.element('.add-action span:nth-of-type(1)').should(have.text('Добавить'))
+        browser.element('.add-action span:nth-of-type(2)').should(have.text(dish.price))
+
+    def add_in_card(self, dish: Dish, count: int = 1):
+        for _ in range(count):
+            if count == 1:
+                browser.element('.add-action').click()
+            else:
+                if _ < count - 1:
+                    browser.element('.btn-counter:nth-of-type(2)').click()
+            dish.count += 1
+        if count > 1:
+            self.check_total_price_in_card(dish, count)
+        return dish.count
+
+    def delete_from_card(self, dish: Dish, count: int = 1):
+        for _ in range(count):
+            browser.element('.btn-counter:nth-of-type(1)').click()
+            dish.count -= 1
+        self.check_total_price_in_card(dish, count)
+        return dish.count
+
+    def check_total_price_in_card(self, dish, count):
+        dish_amount = count * int(dish.price.split(' ')[0])
+        text_amount = f'{dish_amount} ₽'
+        browser.element('.count').should(have.text(str(count)))
+        browser.element('.add-action span:nth-of-type(2)').should(have.text(text_amount))
+
+    def add_to_cart_from_card(self):
+        browser.element('.add-action button').click()
+
+    def confirm_age(self, menu_name: str = 'Карта бара'):
+        browser.element('.title').should(have.text('Вам исполнилось 18 лет?'))
+        browser.element('#agree').click()
+        browser.all('.tab-link').should(have.size_greater_than(0))
+        browser.element('.items-title').should(have.text(menu_name))
+
+    def decline_age(self, menu_name: str = 'Карта бара'):
+        browser.element('.title').should(have.text('Вам исполнилось 18 лет?'))
+        browser.element('#none').click()
+        browser.element('.items-title').should(have.text(menu_name))
+
+
 
 
 
