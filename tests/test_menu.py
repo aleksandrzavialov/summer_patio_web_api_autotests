@@ -150,35 +150,3 @@ class TestsMainScreen:
             application.menu_page.place_order()
         with allure.step('Check cart content'):
             application.cart.check_cart_dish_amount(soup_dish)
-
-        # with allure.step('Add 1 dish to the cart'):
-        #     application.menu_page.add_to_cart(meat_dish)
-        # with allure.step('Check order amount'):
-        #     new_order.check_amount(new_order.calculate_amount(meat_dish))
-        # with allure.step('Find dish 2'):
-        #     application.menu_page.clear_search(meat_dish.name)
-        #     application.menu_page.search_for_a_dish(soup_dish.name)
-        # with allure.step('Add 2 dish to the cart'):
-        #     application.menu_page.add_to_cart(soup_dish)
-        # with allure.step('Check order amount'):
-        #     new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish))
-        # with allure.step('Find dish 3'):
-        #     application.menu_page.clear_search(soup_dish.name)
-        #     application.menu_page.search_for_a_dish(fish_dish.name)
-        # with allure.step('Add 3rd dish to the cart'):
-        #     application.menu_page.add_to_cart(fish_dish, 3)
-        # with allure.step('Check order amount'):
-        #     new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish, fish_dish))
-        # with allure.step('Delete 1 piece of 3rd dish from the cart'):
-        #     application.menu_page.delete_from_cart(fish_dish)
-        # with allure.step('Check order amount'):
-        #     new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish, fish_dish))
-        # with allure.step('Place an order'):
-        #     application.menu_page.place_order()
-        # with allure.step('Check cart content'):
-        #     application.cart.check_cart_dish_amount(meat_dish, soup_dish, fish_dish)
-
-
-
-
-

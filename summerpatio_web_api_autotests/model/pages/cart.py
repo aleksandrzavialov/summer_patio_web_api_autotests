@@ -37,7 +37,7 @@ class Cart:
         if not cancel:
             browser.all('.v-btn__content span').element_by(have.exact_text('Очистить')).click()
             browser.element('.empty-cart').should(be.visible)
-            browser.all('span').element_by(have.exact_text(' Вернуться в меню')).should(be.clickable)
+            browser.all('.v-btn__content span').element_by(have.exact_text('Вернуться в меню')).should(be.clickable)
         else:
             browser.all('.v-btn__content span').element_by(have.exact_text('Отмена')).click()
 
@@ -48,29 +48,33 @@ class Cart:
 
     def check_decrease_possibility(self, dish: Dish):
         if dish.count == 1:
+            temp_name = str(dish.name).capitalize()
             browser.element(
-                f'//*[text()[contains(.,{dish.name})]]/ancestor::div[contains(@class, "tale-row")]//button[1]').should(have.css_class('btn-counter_dishes__disabled'))
+                f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//button[1]').should(have.css_class('btn-counter_dishes__disabled'))
 
     def add_dish_to_order(self, dish: Dish, count: int = 1):
         for _ in range(count):
+            temp_name = str(dish.name).capitalize()
             browser.element(
-                f'//*[text()[contains(.,{dish.name})]]/ancestor::div[contains(@class, "tale-row")]//button[1]').click()
+                f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//button[2]').click()
             dish.count += 1
 
     def delete_dish_from_order(self, dish: Dish, count: int = 1):
         for _ in range(count):
+            temp_name = str(dish.name).capitalize()
             browser.element(
-                f'//*[text()[contains(.,{dish.name})]]/ancestor::div[contains(@class, "tale-row")]//button[2]').click()
-            dish.count -= 1
+                f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//button[1]').click()
+            dish.count -=1
 
     def full_delete_of_dish(self, dish):
-        browser.element(f'//*[text()[contains(.,{dish.name})]]/parent::div/following-sibling::div').click()
+        temp_name = str(dish.name).capitalize()
+        browser.element(f'//*[text()[contains(.,"{temp_name}")]]/parent::div/following-sibling::div').click()
 
-    def check_sum(self, *args):
-        total_sum = 0.0
+    def check_sum(self, args):
+        total_sum = 0
         total_count = 0
         for dish in args:
-            total_sum += dish.count * float(dish.price.split(' ')[0])
+            total_sum += dish.count * int(dish.price.split(' ')[0])
             total_count += dish.count
         return f'{str(total_sum)} ₽'
 
@@ -95,6 +99,11 @@ class Cart:
     def return_to_cart(self):
         browser.element('a[href="/auth"] svg').click()
         browser.element('.section-row .title').should(have.text('Корзина'))
+
+    def return_to_menu_from_empty_cart(self):
+        browser.element('.btn-back').click()
+        browser.all('.tab-link').should(have.size_greater_than(0))
+        browser.all('.row-list').should(have.size_greater_than(0))
 
 
 

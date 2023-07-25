@@ -22,6 +22,7 @@ class MenuPage:
         browser.element('.v-field__input').should(have.attribute('placeholder').value('Поиск'))
         browser.element('.mdi-magnify').should(be.visible)
         browser.element('.v-field__input').type(dish)
+        time.sleep(3)
         self.check_result(dish)
         return self
 
