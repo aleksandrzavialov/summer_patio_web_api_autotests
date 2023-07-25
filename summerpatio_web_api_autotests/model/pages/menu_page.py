@@ -27,7 +27,7 @@ class MenuPage:
 
     def check_result(self, dish):
         time.sleep(3)  # wait for filtering end. unfortunately, no signs of finished loading on UI, so used hardcoded value
-        filtered_collection = browser.all('.v-list-item')
+        filtered_collection = browser.all('.v-list-item .name')
         for element in filtered_collection:
             element.should(have.text(dish))
         return self

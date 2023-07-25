@@ -1,3 +1,5 @@
+import time
+
 from selene.support.shared import browser
 from selene import be, have
 from summerpatio_web_api_autotests.model.components.dish import Dish
@@ -5,7 +7,7 @@ from summerpatio_web_api_autotests.model.components.dish import Dish
 
 
 class Cart:
-    def check_cart_dish_amount(self, *args):
+    def check_cart_dish_amount(self, args):
         browser.all('.tale-row').should(have.size(len(args)))
         counts = []
         sum_of = 0
@@ -16,15 +18,18 @@ class Cart:
         browser.element('.table-title').should(have.text(str(sum_of)))
         return self
 
-    def check_dish_attributes(self, *args):
+    def check_dish_attributes(self, args):
+        time.sleep(5) #wait for pictures to load
         browser.all('.position-cover').should(have.size(len(args)))
         browser.all('.remove-item').should(have.size(len(args)))
         browser.all('.cart-table button[type="button"]').should(have.size(len(args) * 2))
         for dish in args:
-            total_sum = dish.count * float(dish.price.split(' ')[0])
+
+            total_sum = dish.count * int(dish.price.split(' ')[0])
             browser.all('.name').element_by(have.exact_text(dish.name)).should(be.visible)
-            browser.element(f'//*[text()[contains(.,{dish.name})]]/ancestor::div[contains(@class, "tale-row")]//span[contains(@class, "subtitle")]').should(have.text({dish.mass}))
-            browser.element(f'//*[text()[contains(.,{dish.name})]]/ancestor::div[contains(@class, "tale-row")]//span[contains(@class, "cost-dishes")]').should(have.text(f'{total_sum} ₽'))
+            temp_name = str(dish.name).capitalize()
+            browser.element(f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//span[contains(@class, "subtitle")]').should(have.text(dish.mass))
+            browser.element(f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//span[contains(@class, "cost-dishes")]').should(have.text(f'{total_sum} ₽'))
 
     def clear_cart(self, cancel: bool = False):
         browser.element('.v-btn__content').click()
@@ -38,6 +43,8 @@ class Cart:
 
     def leave_cart(self):
         browser.element('a[href="/cart"]')
+        browser.all('.tab-link').should(have.size_greater_than(0))
+        browser.all('.row-list').should(have.size_greater_than(0))
 
     def check_decrease_possibility(self, dish: Dish):
         if dish.count == 1:
@@ -70,10 +77,11 @@ class Cart:
     def check_non_empty_cart_appearance(self, *args):
         browser.element('.section-row .title').should(have.text('Корзина'))
         self.check_cart_dish_amount(args)
-        self.check_dish_attributes()
-        cart_sum = self.check_sum(*args)
+        self.check_dish_attributes(args)
+        cart_sum = self.check_sum(args)
         browser.element('.btn-cart .title').should(have.text('Оформить заказ'))
         browser.element('.amount-cost').should(have.text(cart_sum))
+        return cart_sum
 
     def return_from_card(self):
         browser.element('a svg').click()
@@ -82,6 +90,11 @@ class Cart:
 
     def start_process_order(self):
         browser.element('.btn-cart').click()
+        browser.element('.title').should(have.text('Авторизация'))
+
+    def return_to_cart(self):
+        browser.element('a[href="/auth"] svg').click()
+        browser.element('.section-row .title').should(have.text('Корзина'))
 
 
 
