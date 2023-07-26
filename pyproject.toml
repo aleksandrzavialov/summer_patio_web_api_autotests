@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "summer-patio-web-api-autotests"
+name = "summer-patio-web-autotests"
 version = "0.1.0"
-description = "UI and API autotests for Summer Patio"
+description = "UI autotests for Summer Patio"
 authors = ["Aleksandr Zavialov <aleksandr.zavialov@grse.de>"]
 readme = "README.md"
 packages = [{include = "summer_patio_web_api_autotests"}]

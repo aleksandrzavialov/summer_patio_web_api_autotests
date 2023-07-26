@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from selene.support.shared import browser
-from selene import be, have, command
-
-from summerpatio_web_api_autotests.model.components.dish import Dish
+from selene import have
 
 
 @dataclass()

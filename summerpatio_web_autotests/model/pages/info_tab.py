@@ -2,8 +2,8 @@ from datetime import date
 
 from selene.support.shared import browser
 from selene import be, have
-from summerpatio_web_api_autotests.data.contacts import Contact
-from summerpatio_web_api_autotests.data.textings import Texting
+from summerpatio_web_autotests.data.contacts import Contact
+from summerpatio_web_autotests.data.textings import Texting
 
 
 class InfoTab:
@@ -33,7 +33,6 @@ class InfoTab:
 
     def check_working_hours(self):
         current_day = date.strftime(date.today(), "%a")
-        print('CURRENT DAY: '+current_day)
         actual_schedule = ''
         browser.element('.work svg:nth-child(1)').should(be.visible)
         match current_day:
@@ -70,3 +69,8 @@ class InfoTab:
         browser.element('.contacts-list li:nth-child(1) .link_contact').should(have.attribute('href').value(Contact.support_link_for_phone.value[0]))
         return self
 
+    def check_info_tab_content(self):
+        self.check_address()
+        self.check_working_hours()
+        self.check_payment_methods()
+        self.check_contacts()

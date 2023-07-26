@@ -1,9 +1,7 @@
 import time
-
 from selene.support.shared import browser
 from selene import be, have
-from summerpatio_web_api_autotests.model.components.dish import Dish
-
+from summerpatio_web_autotests.model.components.dish import Dish
 
 
 class Cart:
@@ -19,12 +17,11 @@ class Cart:
         return self
 
     def check_dish_attributes(self, args):
-        time.sleep(5) #wait for pictures to load
+        time.sleep(3) #wait for pictures to load
         browser.all('.position-cover').should(have.size(len(args)))
         browser.all('.remove-item').should(have.size(len(args)))
         browser.all('.cart-table button[type="button"]').should(have.size(len(args) * 2))
         for dish in args:
-
             total_sum = dish.count * int(dish.price.split(' ')[0])
             browser.all('.name').element_by(have.exact_text(dish.name)).should(be.visible)
             temp_name = str(dish.name).capitalize()
@@ -40,11 +37,6 @@ class Cart:
             browser.all('.v-btn__content span').element_by(have.exact_text('Вернуться в меню')).should(be.clickable)
         else:
             browser.all('.v-btn__content span').element_by(have.exact_text('Отмена')).click()
-
-    def leave_cart(self):
-        browser.element('a[href="/cart"]')
-        browser.all('.tab-link').should(have.size_greater_than(0))
-        browser.all('.row-list').should(have.size_greater_than(0))
 
     def check_decrease_possibility(self, dish: Dish):
         if dish.count == 1:

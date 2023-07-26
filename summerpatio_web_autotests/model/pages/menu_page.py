@@ -2,7 +2,7 @@ import time
 from selene.support.shared import browser
 from selene import be, have, command
 from selenium.webdriver import Keys
-from summerpatio_web_api_autotests.model.components.dish import Dish
+from summerpatio_web_autotests.model.components.dish import Dish
 
 
 class MenuPage:
@@ -154,7 +154,15 @@ class MenuPage:
     def decline_age(self, menu_name: str = 'Карта бара'):
         browser.element('.title').should(have.text('Вам исполнилось 18 лет?'))
         browser.element('#none').click()
-        browser.element('.items-title').should(have.text(menu_name))
+
+    def check_unable_until_reload(self, menu_name: str = 'Карта бара'):
+        browser.all('.tab-link').should(have.size(0))
+        browser.all('.row-list').should(have.size(0))
+        browser.all('.menu-name_mobile').element_by(have.exact_text(menu_name)).click()
+        browser.all('.tab-link').should(have.size(0))
+        browser.all('.row-list').should(have.size(0))
+        browser.driver.refresh()
+
 
 
 

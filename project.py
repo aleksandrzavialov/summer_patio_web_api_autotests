@@ -1,7 +1,7 @@
 from typing import Literal
 import pydantic
 
-from summerpatio_web_api_autotests.utils import path
+from summerpatio_web_autotests.utils import path
 
 BrowserType = Literal['chrome', 'firefox']
 

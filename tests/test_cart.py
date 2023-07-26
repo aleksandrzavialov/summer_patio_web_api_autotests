@@ -1,8 +1,7 @@
 import allure
 import pytest
-from selene import browser
 from allure_commons.types import Severity
-from summerpatio_web_api_autotests.model import application
+from summerpatio_web_autotests.model import application
 
 
 @allure.tag("ui", "web")
@@ -20,13 +19,10 @@ class TestsCart:
         new_cart = application.cart
 
         with allure.step('Open main page'):
-            browser.open('/')
-        with allure.step('Check link to the agreement and agree with cookies'):
-            application.main_page.check_agreement()
-            application.main_page.agree_with_cookies()
+            application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Open delivery menu'):
             application.delivery_tab.open_menu()
-        with allure.step('Add dish 1 to the cart'):
+        with allure.step('Add dish 1 to the cart from menu'):
             application.menu_page.search_for_a_dish(meat_dish.name)
             application.menu_page.add_to_cart(meat_dish, 2)
         with allure.step('Add dish 2 to the cart from menu'):
@@ -61,10 +57,7 @@ class TestsCart:
         new_cart = application.cart
 
         with allure.step('Open main page'):
-            browser.open('/')
-        with allure.step('Check link to the agreement and agree with cookies'):
-            application.main_page.check_agreement()
-            application.main_page.agree_with_cookies()
+            application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Open delivery menu'):
             application.delivery_tab.open_menu()
         with allure.step('Add dish 1 to the cart from menu'):
@@ -79,10 +72,13 @@ class TestsCart:
         with allure.step('Check cart content'):
             application.menu_page.place_order()
             new_cart.check_non_empty_cart_appearance(meat_dish, fish_dish)
-        with allure.step('Add 1 piece of meat dish'):
+        with allure.step('Add 3 pieces of meat dish'):
             new_cart.add_dish_to_order(meat_dish, 3)
+        with allure.step('Delete 1 piece of fish dish and check it is impossible to delete if 1 piece is in the cart'):
             new_cart.delete_dish_from_order(fish_dish, 1)
             new_cart.check_decrease_possibility(fish_dish)
+        with allure.step('Check cart content'):
             new_cart.check_non_empty_cart_appearance(meat_dish, fish_dish)
+        with allure.step('Delete fish dish completely'):
             new_cart.full_delete_of_dish(fish_dish)
             new_cart.check_non_empty_cart_appearance(meat_dish)

@@ -1,10 +1,10 @@
 from selene import be, have
 from selene.support.shared import browser
-from summerpatio_web_api_autotests.data.contacts import Contact
-from summerpatio_web_api_autotests.data.links import Link
-from summerpatio_web_api_autotests.data.textings import Texting
-from summerpatio_web_api_autotests.model.components.burger import Burger
-from summerpatio_web_api_autotests.model.components.header import Header
+from summerpatio_web_autotests.data.contacts import Contact
+from summerpatio_web_autotests.data.links import Link
+from summerpatio_web_autotests.data.textings import Texting
+from summerpatio_web_autotests.model.components.burger import Burger
+from summerpatio_web_autotests.model.components.header import Header
 from datetime import date
 
 
@@ -17,6 +17,14 @@ class MainPage:
     def check_agreement(self):
         browser.element('.rules').should(have.attribute('href').value(f'{Link.agreement_link.value[0]}'))
         return self
+
+    def open_main_page_and_agree_with_cookies(self):
+        browser.open('/')
+        browser.should(have.title_containing('Летний дворик'))
+        if browser.element('.btn-cookie').matching(be.visible):
+            self.check_agreement()
+            self.agree_with_cookies()
+
 
     def check_burger_menu(self):
         date_today = date.today()
@@ -39,15 +47,5 @@ class MainPage:
         browser.element('.logo').should(be.visible).should(have.attribute('width').value(Header.logo['width'])).\
             should(have.attribute('height').value(Header.logo['height']))
         return self
-
-    # def authorize_in_ui(self):
-    #     browser.element('.burger').should(be.visible).click()
-    #     browser.element('.modal-link').click()
-    #     browser.element('[class=google]').click()
-    #     browser.switch_to_next_tab()
-    #     browser.element('#identifierId').type(Contact.google_account.value[0])
-    #     browser.element('#identifierNext').click()
-    #     return self
-
 
 
