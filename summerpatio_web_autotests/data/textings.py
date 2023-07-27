@@ -9,4 +9,3 @@ class Texting(enum.Enum):
     developed = '© Сайт разработан',
     company = 'GisMenu',
     payment_methods = ['Наличные', 'Безналичные'],
-

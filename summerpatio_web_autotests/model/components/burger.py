@@ -8,4 +8,3 @@ class Burger:
     offer_link = '.pb-4'
     burger_footer = '.footer-info:nth-of-type(3)'
     return_button = '.v-card-text>svg'
-

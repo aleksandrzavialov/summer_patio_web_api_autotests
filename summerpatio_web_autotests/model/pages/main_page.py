@@ -25,7 +25,6 @@ class MainPage:
             self.check_agreement()
             self.agree_with_cookies()
 
-
     def check_burger_menu(self):
         date_today = date.today()
         browser.element(Burger.burger).should(be.visible).click()
@@ -46,5 +45,3 @@ class MainPage:
         browser.element('.logo').should(be.visible).should(have.attribute('width').value(Header.logo['width'])).\
             should(have.attribute('height').value(Header.logo['height']))
         return self
-
-

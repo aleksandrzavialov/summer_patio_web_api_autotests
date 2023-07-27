@@ -1,5 +1,3 @@
-
-
 class Dish:
     def __init__(self, name, group, mass, price):
         self.name = name

@@ -8,4 +8,3 @@ def relative_from_root(path: str):
         .absolute()
         .__str__()
     )
-

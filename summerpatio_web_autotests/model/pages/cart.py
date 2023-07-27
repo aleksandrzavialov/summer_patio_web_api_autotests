@@ -17,7 +17,6 @@ class Cart:
         return self
 
     def check_dish_attributes(self, args):
-        time.sleep(4) #wait for pictures to load
         browser.all('.position-cover').should(have.size(len(args)))
         browser.all('.remove-item').should(have.size(len(args)))
         browser.all('.cart-table button[type="button"]').should(have.size(len(args) * 2))
@@ -56,7 +55,7 @@ class Cart:
             temp_name = str(dish.name).capitalize()
             browser.element(
                 f'//*[text()[contains(.,"{temp_name}")]]/ancestor::div[contains(@class, "tale-row")]//button[1]').click()
-            dish.count -=1
+            dish.count -= 1
 
     def full_delete_of_dish(self, dish):
         temp_name = str(dish.name).capitalize()
@@ -96,9 +95,3 @@ class Cart:
         browser.element('.btn-back').click()
         browser.all('.tab-link').should(have.size_greater_than(0))
         browser.all('.row-list').should(have.size_greater_than(0))
-
-
-
-
-
-

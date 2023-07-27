@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 from selene import browser
@@ -43,6 +45,8 @@ class TestsMenuScreen:
             application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Open delivery menu'):
             application.delivery_tab.open_menu()
+        with allure.step('Check menu layout'):
+            application.menu_page.check_menu_page()
         with allure.step('Check dish attributes'):
             application.menu_page.check_dish(meat_dish)
 
@@ -109,7 +113,6 @@ class TestsMenuScreen:
             application.menu_page.place_order()
             application.cart.check_non_empty_cart_appearance(meat_dish, fish_dish)
 
-
     @allure.severity(Severity.NORMAL)
     @allure.title('Add a dish from card part 2')
     def test_individual_cards_gm_1194_gr_3_4(self, browser_management):
@@ -154,7 +157,3 @@ class TestsMenuScreen:
             application.menu_page.check_unable_until_reload()
             application.delivery_tab.open_menu('Карта бара')
             application.menu_page.confirm_age()
-
-
-
-

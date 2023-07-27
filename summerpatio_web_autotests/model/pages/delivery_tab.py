@@ -14,5 +14,3 @@ class DeliveryTab:
     def open_alcohol_menu(self, menu_name: str = 'Карта бара'):
         browser.all('.menu-name_mobile').element_by(have.exact_text(menu_name)).click()
         browser.all('.v-btn__content span').element_by(have.exact_text('Да, исполнилось')).click()
-
-

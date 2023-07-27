@@ -18,5 +18,3 @@ class Order:
         browser.element('.btn-cart-payment:nth-of-type(1)').should(have.text(str(calculated[0])))
         browser.element('.counter-text').should(have.text(str(calculated[1])))
         return self
-
-

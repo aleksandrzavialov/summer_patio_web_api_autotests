@@ -48,5 +48,3 @@ class TestsMainScreen:
             application.info_tab.open_tab().check_if_tab_active()
         with allure.step('Check content of Info tab'):
             application.info_tab.check_info_tab_content()
-
-

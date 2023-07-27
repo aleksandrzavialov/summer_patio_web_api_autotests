@@ -1,4 +1,3 @@
-import time
 from selene.support.shared import browser
 from selene import be, have, command
 from selenium.webdriver import Keys
@@ -21,8 +20,7 @@ class MenuPage:
         browser.all('.col-title_hidden').should(have.size(2))
         browser.element('.v-field__input').should(have.attribute('placeholder').value('Поиск'))
         browser.element('.mdi-magnify').should(be.visible)
-        browser.element('.v-field__input').type(dish)
-        time.sleep(5)
+        browser.element('.v-field__input').type(dish).press_enter()
         return self
 
     def check_result(self, dish):
@@ -50,12 +48,10 @@ class MenuPage:
 
     def clear_search(self, dish):
         for _ in dish:
-            browser.element('.v-field__input').send_keys(Keys.BACKSPACE)
-        time.sleep(3)
+            browser.element('.v-field__input').send_keys(Keys.BACKSPACE).press_tab()
         return self
 
     def check_dish(self, dish: Dish):
-        time.sleep(3)
         self.search_for_a_dish(dish.name)
 
         browser.element('.name').should(have.exact_text(dish.name))
@@ -157,9 +153,3 @@ class MenuPage:
         browser.all('.tab-link').should(have.size(0))
         browser.all('.row-list').should(have.size(0))
         browser.driver.refresh()
-
-
-
-
-
-
