@@ -1,4 +1,3 @@
-from summerpatio_web_autotests.model.components.dish import Dish
 from summerpatio_web_autotests.model.components.order import Order
 from summerpatio_web_autotests.model.pages.cart import Cart
 from summerpatio_web_autotests.model.pages.main_page import MainPage

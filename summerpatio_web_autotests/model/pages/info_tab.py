@@ -1,5 +1,4 @@
 from datetime import date
-
 from selene.support.shared import browser
 from selene import be, have
 from summerpatio_web_autotests.data.contacts import Contact

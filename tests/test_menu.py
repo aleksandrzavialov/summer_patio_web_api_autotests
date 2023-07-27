@@ -13,8 +13,8 @@ from summerpatio_web_autotests.model.components.dish import Dish
 class TestsMenuScreen:
     @allure.severity(Severity.CRITICAL)
     @allure.title('Validate filtering of dishes')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_check_search_in_menu_gm_1170(self, browser_management):
+    @pytest.mark.parametrize('browser_management', ['iPhone SE'], indirect=True)
+    def test_search_in_menu_gm_1170(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Open delivery menu'):
@@ -36,8 +36,7 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.CRITICAL)
     @allure.title('Validate dish cards')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_check_search_in_menu_gm_1182(self, browser_management):
+    def test_dish_cards_gm_1182(self, browser_management):
         meat_dish = Dish(*application.meat_dish_1)
 
         with allure.step('Open main page, check title'):
@@ -49,8 +48,8 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.CRITICAL)
     @allure.title('Add a dish from menu')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_check_search_in_menu_gm_1183(self, browser_management):
+    @pytest.mark.parametrize('browser_management', ['iPad Mini'], indirect=True)
+    def test_add_from_menu_gm_1183(self, browser_management):
         meat_dish = Dish(*application.meat_dish_1)
         soup_dish = Dish(*application.soup_dish_2)
         fish_dish = Dish(*application.fish_dish_3)
@@ -85,8 +84,7 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Add a dish from card part 1')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_add_dish_from_cards_gm_1194_gr_1_2(self, browser_management):
+    def test_individual_cards_gm_1194_gr_1_2(self, browser_management):
         meat_dish = Dish(*application.meat_dish_1)
         fish_dish = Dish(*application.fish_dish_3)
         new_order = application.new_order
@@ -114,8 +112,7 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Add a dish from card part 2')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_add_dish_from_cards_gm_1194_gr_3_4(self, browser_management):
+    def test_individual_cards_gm_1194_gr_3_4(self, browser_management):
         soup_dish = Dish(*application.soup_dish_2)
         new_order = application.new_order
         with allure.step('Open main page, check title'):
@@ -138,8 +135,7 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Check alcohol menu if agree to proceed')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_add_dish_from_cards_gm_1025_accept(self, browser_management):
+    def test_open_alcohol_accept_gm_1025(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Open alcohol menu'):
@@ -148,8 +144,7 @@ class TestsMenuScreen:
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Refuse to open alcohol menu')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_add_dish_from_cards_gm_1025_decline(self, browser_management):
+    def test_open_alcohol_decline_gm_1025(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
         with allure.step('Refuse to open alcohol menu'):

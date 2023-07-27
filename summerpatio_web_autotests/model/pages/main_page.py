@@ -21,7 +21,7 @@ class MainPage:
     def open_main_page_and_agree_with_cookies(self):
         browser.open('/')
         browser.should(have.title_containing('Летний дворик'))
-        if browser.element('.btn-cookie').matching(be.visible):
+        if browser.element('.btn-cookie').wait_until(be.visible):
             self.check_agreement()
             self.agree_with_cookies()
 

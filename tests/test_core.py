@@ -1,5 +1,4 @@
 import allure
-import pytest
 from allure_commons.types import Severity
 from summerpatio_web_autotests.model import application
 
@@ -11,8 +10,6 @@ from summerpatio_web_autotests.model import application
 class TestsMainScreen:
     @allure.severity(Severity.BLOCKER)
     @allure.title('Validate main page')
-    #@pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_main_page_gm_1162(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -27,7 +24,6 @@ class TestsMainScreen:
 
     @allure.severity(Severity.BLOCKER)
     @allure.title('Validate side menu')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_side_menu_gm_1166(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -36,7 +32,6 @@ class TestsMainScreen:
 
     @allure.severity(Severity.BLOCKER)
     @allure.title('Open Delivery Menu')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_opening_menu_gm_1163(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -46,7 +41,6 @@ class TestsMainScreen:
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Validate Info tab')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_info_tab_gm_1165(self, browser_management):
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()

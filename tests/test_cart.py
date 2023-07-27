@@ -12,7 +12,7 @@ from summerpatio_web_autotests.model.components.dish import Dish
 class TestsCart:
     @allure.severity(Severity.CRITICAL)
     @allure.title('Check working with whole cart')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
+    @pytest.mark.parametrize('browser_management', ['iPad Mini'], indirect=True)
     def test_check_cart_content_and_clearing_gm_1196(self, browser_management):
         meat_dish = Dish(*application.meat_dish_1)
         soup_dish = Dish(*application.soup_dish_2)
@@ -51,8 +51,8 @@ class TestsCart:
 
     @allure.severity(Severity.CRITICAL)
     @allure.title('Check working with separate positions in cart')
-    @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
-    def test_check_cart_content_and_clearing_gm_1197(self, browser_management):
+    @pytest.mark.parametrize('browser_management', ['Nexus 5'], indirect=True)
+    def test_check_work_in_cart_gm_1197(self, browser_management):
         meat_dish = Dish(*application.meat_dish_1)
         fish_dish = Dish(*application.fish_dish_3)
         new_cart = application.cart

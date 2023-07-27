@@ -1,15 +1,12 @@
 import os
 import pytest
 from dotenv import load_dotenv
-from summerpatio_web_autotests.data.devices import FirefoxList, ChromeList, DeviceInfo
+from summerpatio_web_autotests.data.devices import DeviceInfo
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FFOptions
-
 from selene.support.shared import browser
 from utils.allure import attach
-
 from selenium import webdriver
-
 import project
 
 DEFAULT_BROWSER_VERSION = '100.0'
@@ -29,10 +26,7 @@ def load_env():
 
 
 def return_device_list():
-    if project.config.driver_name == 'chrome':
-        return DeviceInfo.chrome_devices
-    else:
-        return DeviceInfo.firefox_devices
+    return DeviceInfo.devices_resolution.keys()
 
 
 @pytest.fixture(scope='function', params=return_device_list())
@@ -46,18 +40,9 @@ def browser_management(request):
     browser.config.timeout = project.config.timeout
 
     match browser.config.driver_name:
-        case 'chrome':
-            print(1)
-            # driver_options = webdriver.ChromeOptions() # comment for selenide
-            # driver_options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) # comment for selenoid
-            # browser.config.driver_options = driver_options # comment for selenide
         case 'firefox':
-            browser.config.window_width = DeviceInfo.firefox_devices_dict.get(request.param)[0]# comment for selenoid
-            browser.config.window_height = DeviceInfo.firefox_devices_dict.get(request.param)[1]# comment for selenoid
-
-            # driver_options = webdriver.FirefoxOptions()
-            # driver_options.set_preference("general.useragent.override", project.config.safari_user_agent)
-            # browser.config.driver_options = driver_options
+            browser.config.window_width = DeviceInfo.devices_resolution.get(request.param)[0]
+            browser.config.window_height = DeviceInfo.devices_resolution.get(request.param)[1]
 
     options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
     options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) \
