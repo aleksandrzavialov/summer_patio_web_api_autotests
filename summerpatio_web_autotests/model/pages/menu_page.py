@@ -48,7 +48,8 @@ class MenuPage:
 
     def clear_search(self, dish):
         for _ in dish:
-            browser.element('.v-field__input').send_keys(Keys.BACKSPACE).press_tab()
+            browser.element('.v-field__input').send_keys(Keys.BACKSPACE)
+        browser.element('.v-field__input').press_tab()
         return self
 
     def check_dish(self, dish: Dish):
