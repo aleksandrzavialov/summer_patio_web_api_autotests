@@ -47,17 +47,17 @@ def browser_management(request):
 
     match browser.config.driver_name:
         case 'chrome':
-            driver_options = webdriver.ChromeOptions() # comment for selenide
-            driver_options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) # comment for selenide
-            browser.config.driver_options = driver_options # comment for selenide
+            print(1)
+            # driver_options = webdriver.ChromeOptions() # comment for selenide
+            # driver_options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) # comment for selenoid
+            # browser.config.driver_options = driver_options # comment for selenide
         case 'firefox':
+            browser.config.window_width = DeviceInfo.firefox_devices_dict.get(request.param)[0]# comment for selenoid
+            browser.config.window_height = DeviceInfo.firefox_devices_dict.get(request.param)[1]# comment for selenoid
 
-            browser.config.window_width = DeviceInfo.firefox_devices_dict.get(request.param)[0]# comment for selenide
-            browser.config.window_height = DeviceInfo.firefox_devices_dict.get(request.param)[1]# comment for selenide
-
-            driver_options = webdriver.FirefoxOptions()
-            driver_options.set_preference("general.useragent.override", project.config.safari_user_agent)
-            browser.config.driver_options = driver_options
+            # driver_options = webdriver.FirefoxOptions()
+            # driver_options.set_preference("general.useragent.override", project.config.safari_user_agent)
+            # browser.config.driver_options = driver_options
 
     options = ChromeOptions() if browser.config.driver_name == 'chrome' else FFOptions()
     options.add_experimental_option("mobileEmulation", {"deviceName": request.param}) \

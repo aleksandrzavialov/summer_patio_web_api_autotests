@@ -5,7 +5,6 @@ from selene import have
 
 @dataclass()
 class Order:
-    amount: float = 0.0
 
     def calculate_amount(self, *args):
         total_sum = 0.0

@@ -1,12 +1,9 @@
-from dataclasses import dataclass
 
 
-@dataclass()
 class Dish:
-    name: str
-    group: str
-    mass: str
-    price: str
-    count: int = 0
-
-
+    def __init__(self, name, group, mass, price):
+        self.name = name
+        self.group = group
+        self.mass = mass
+        self.price = price
+        self.count = 0

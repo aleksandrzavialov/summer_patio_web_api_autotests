@@ -17,7 +17,7 @@ class Cart:
         return self
 
     def check_dish_attributes(self, args):
-        time.sleep(3) #wait for pictures to load
+        time.sleep(4) #wait for pictures to load
         browser.all('.position-cover').should(have.size(len(args)))
         browser.all('.remove-item').should(have.size(len(args)))
         browser.all('.cart-table button[type="button"]').should(have.size(len(args) * 2))

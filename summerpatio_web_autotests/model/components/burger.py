@@ -1,7 +1,7 @@
 class Burger:
     burger = '.burger'
     authorize = '.menu-list .modal-link'
-    footer_texts = '.curtain .footer-text'
+    footer_text = '.footer-text:nth-of-type(2)'
     phone_link = '.link-phone'
     mail_button = '.support-group a:nth-child(1)'
     telegram_button = '.support-group a:nth-child(2)'

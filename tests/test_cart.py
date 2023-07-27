@@ -2,6 +2,7 @@ import allure
 import pytest
 from allure_commons.types import Severity
 from summerpatio_web_autotests.model import application
+from summerpatio_web_autotests.model.components.dish import Dish
 
 
 @allure.tag("ui", "web")
@@ -13,9 +14,9 @@ class TestsCart:
     @allure.title('Check working with whole cart')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_cart_content_and_clearing_gm_1196(self, browser_management):
-        meat_dish = application.meat_dish_1
-        soup_dish = application.soup_dish_2
-        fish_dish = application.fish_dish_3
+        meat_dish = Dish(*application.meat_dish_1)
+        soup_dish = Dish(*application.soup_dish_2)
+        fish_dish = Dish(*application.fish_dish_3)
         new_cart = application.cart
 
         with allure.step('Open main page'):
@@ -52,8 +53,8 @@ class TestsCart:
     @allure.title('Check working with separate positions in cart')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_cart_content_and_clearing_gm_1197(self, browser_management):
-        meat_dish = application.meat_dish_1
-        fish_dish = application.fish_dish_3
+        meat_dish = Dish(*application.meat_dish_1)
+        fish_dish = Dish(*application.fish_dish_3)
         new_cart = application.cart
 
         with allure.step('Open main page'):

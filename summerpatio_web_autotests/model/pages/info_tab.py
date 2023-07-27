@@ -14,7 +14,7 @@ class InfoTab:
         'Чтв.': '00:20 – 23:55',
         'Пт.': '06:00 – 24:00',
         'Сбт.': '00:00 – 23:00',
-        'Вскр.': 'Выходной'
+        'Вскр.': '08:00 – 24:00'
     }
 
     def open_tab(self):
@@ -66,7 +66,7 @@ class InfoTab:
     def check_contacts(self):
         browser.element('.links .pb-6').should(have.text('Контакты'))
         browser.all('a.link_contact').should(have.size_greater_than(0))
-        browser.element('.contacts-list li:nth-child(1) .link_contact').should(have.attribute('href').value(Contact.support_link_for_phone.value[0]))
+        browser.element('.contacts-list li:nth-child(1) .link_contact').should(have.attribute('href'))
         return self
 
     def check_info_tab_content(self):

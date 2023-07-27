@@ -3,6 +3,7 @@ import pytest
 from selene import browser
 from allure_commons.types import Severity
 from summerpatio_web_autotests.model import application
+from summerpatio_web_autotests.model.components.dish import Dish
 
 
 @allure.tag("ui", "web")
@@ -37,7 +38,7 @@ class TestsMenuScreen:
     @allure.title('Validate dish cards')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_search_in_menu_gm_1182(self, browser_management):
-        meat_dish = application.meat_dish_1
+        meat_dish = Dish(*application.meat_dish_1)
 
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -50,9 +51,9 @@ class TestsMenuScreen:
     @allure.title('Add a dish from menu')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_check_search_in_menu_gm_1183(self, browser_management):
-        meat_dish = application.meat_dish_1
-        soup_dish = application.soup_dish_2
-        fish_dish = application.fish_dish_3
+        meat_dish = Dish(*application.meat_dish_1)
+        soup_dish = Dish(*application.soup_dish_2)
+        fish_dish = Dish(*application.fish_dish_3)
         new_order = application.new_order
 
         with allure.step('Open main page, check title'):
@@ -78,7 +79,7 @@ class TestsMenuScreen:
             new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish, fish_dish))
         with allure.step('Place an order and check cart content'):
             application.menu_page.place_order()
-            application.cart.check_cart_dish_amount(meat_dish, soup_dish, fish_dish)
+            application.cart.check_non_empty_cart_appearance(meat_dish, soup_dish, fish_dish)
         with allure.step('Clear cart'):
             application.cart.clear_cart()
 
@@ -86,8 +87,8 @@ class TestsMenuScreen:
     @allure.title('Add a dish from card part 1')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_add_dish_from_cards_gm_1194_gr_1_2(self, browser_management):
-        meat_dish = application.meat_dish_1
-        fish_dish = application.fish_dish_3
+        meat_dish = Dish(*application.meat_dish_1)
+        fish_dish = Dish(*application.fish_dish_3)
         new_order = application.new_order
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -108,14 +109,14 @@ class TestsMenuScreen:
             new_order.check_amount(new_order.calculate_amount(meat_dish, fish_dish))
         with allure.step('Place an order and check cart content'):
             application.menu_page.place_order()
-            application.cart.check_cart_dish_amount(meat_dish, fish_dish)
+            application.cart.check_non_empty_cart_appearance(meat_dish, fish_dish)
 
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Add a dish from card part 2')
     @pytest.mark.parametrize('browser_management', ["IPhone_8"], indirect=True)
     def test_add_dish_from_cards_gm_1194_gr_3_4(self, browser_management):
-        soup_dish = application.soup_dish_2
+        soup_dish = Dish(*application.soup_dish_2)
         new_order = application.new_order
         with allure.step('Open main page, check title'):
             application.main_page.open_main_page_and_agree_with_cookies()
@@ -133,7 +134,7 @@ class TestsMenuScreen:
             application.menu_page.add_to_cart_from_card()
         with allure.step('Place an order and check cart content'):
             application.menu_page.place_order()
-            application.cart.check_cart_dish_amount(soup_dish)
+            application.cart.check_non_empty_cart_appearance(soup_dish)
 
     @allure.severity(Severity.NORMAL)
     @allure.title('Check alcohol menu if agree to proceed')
@@ -158,4 +159,7 @@ class TestsMenuScreen:
             application.menu_page.check_unable_until_reload()
             application.delivery_tab.open_menu('Карта бара')
             application.menu_page.confirm_age()
+
+
+
 

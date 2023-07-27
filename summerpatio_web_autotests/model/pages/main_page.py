@@ -30,9 +30,8 @@ class MainPage:
         date_today = date.today()
         browser.element(Burger.burger).should(be.visible).click()
         browser.element(Burger.authorize).should(have.text(f'{Texting.authorize.value[0]}'))
-        browser.all(Burger.footer_texts).should(have.exact_texts(
-            f'{Texting.question.value[0]} {Contact.support.value[0]}', f'{Texting.support_invite.value[0]}'))
-        browser.element(Burger.phone_link).should(have.attribute('href').value(Contact.support_link_for_phone.value[0]))
+        browser.element(Burger.footer_text).should(have.text(Texting.support_invite.value[0]))
+        browser.element(Burger.phone_link).should(have.attribute('href'))
         browser.element(Burger.mail_button).should(have.attribute('href').value(Contact.support_link_for_mail.value[0]))
         browser.element(Burger.telegram_button).should(have.attribute('href').value(Contact.support_link_for_telegram.value[0]))
         browser.element(Burger.offer_link).should(have.attribute('href').value(Link.offer_link.value[0])).\

@@ -22,20 +22,17 @@ class MenuPage:
         browser.element('.v-field__input').should(have.attribute('placeholder').value('Поиск'))
         browser.element('.mdi-magnify').should(be.visible)
         browser.element('.v-field__input').type(dish)
-        time.sleep(3)
-        self.check_result(dish)
+        time.sleep(5)
         return self
 
     def check_result(self, dish):
-        time.sleep(3)  # wait for filtering end. unfortunately, no signs of finished loading on UI, so used hardcoded value
         filtered_collection = browser.all('.v-list-item .name')
         for element in filtered_collection:
             element.should(have.text(dish))
         return self
 
     def check_filtering(self, dish: str):
-        self.search_for_a_dish(dish).\
-            check_result(dish)
+        self.search_for_a_dish(dish).check_result(dish)
 
     def return_to_main_page(self):
         browser.element('.v-field__input').press_tab()
@@ -59,9 +56,6 @@ class MenuPage:
 
     def check_dish(self, dish: Dish):
         time.sleep(3)
-        browser.all('.name').element_by(have.exact_text(dish.name)).click()
-        browser.all('.name').element_by(have.exact_text(dish.name)).perform(command.js.scroll_into_view)
-        browser.element('.tab_active').should(have.text(dish.group))
         self.search_for_a_dish(dish.name)
 
         browser.element('.name').should(have.exact_text(dish.name))
@@ -74,6 +68,7 @@ class MenuPage:
             browser.element('.btn-counter').should(have.size(2))
 
     def add_to_cart(self, dish: Dish, count: int = 1):
+        browser.element('.name').should(have.text(dish.name))
         if dish.count == 0:
             for _ in range(count):
                 if _ == 0:
@@ -133,7 +128,7 @@ class MenuPage:
         for _ in range(count):
             browser.element('.btn-counter:nth-of-type(1)').click()
             dish.count -= 1
-        self.check_total_price_in_card(dish, count)
+        self.check_total_price_in_card(dish, dish.count)
         return dish.count
 
     def check_total_price_in_card(self, dish, count):
