@@ -27,11 +27,11 @@ class TestsCart:
             application.menu_page.search_for_a_dish(meat_dish.name)
             application.menu_page.add_to_cart(meat_dish, 2)
         with allure.step('Add dish 2 to the cart from menu'):
-            application.menu_page.clear_search(meat_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(soup_dish.name)
             application.menu_page.add_to_cart(soup_dish, 3)
         with allure.step('Add dish 3 from card'):
-            application.menu_page.clear_search(soup_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(fish_dish.name)
             application.menu_page.open_dish_card(fish_dish)
             application.menu_page.add_in_card(fish_dish, 4)
@@ -65,7 +65,7 @@ class TestsCart:
             application.menu_page.search_for_a_dish(meat_dish.name)
             application.menu_page.add_to_cart(meat_dish, 3)
         with allure.step('Add dish 2 from card'):
-            application.menu_page.clear_search(meat_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(fish_dish.name)
             application.menu_page.open_dish_card(fish_dish)
             application.menu_page.add_in_card(fish_dish, 2)

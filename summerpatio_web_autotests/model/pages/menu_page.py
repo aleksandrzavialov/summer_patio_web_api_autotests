@@ -17,10 +17,11 @@ class MenuPage:
     def search_for_a_dish(self, dish):
         browser.all('.name').should(have.size_greater_than(0))
         browser.element('.search').click()
-        browser.all('.col-title_hidden').should(have.size(2))
+        browser.all('.col-title_hidden').wait_until(have.size(2))
         browser.element('.v-field__input').should(have.attribute('placeholder').value('Поиск'))
         browser.element('.mdi-magnify').should(be.visible)
         browser.element('.v-field__input').type(dish).press_enter()
+        browser.all('.image').wait_until(be.visible)
         return self
 
     def check_result(self, dish):
@@ -46,10 +47,9 @@ class MenuPage:
         filtered_collection = browser.all('.v-list-item')
         return len(filtered_collection)
 
-    def clear_search(self, dish):
-        for _ in dish:
-            browser.element('.v-field__input').send_keys(Keys.BACKSPACE)
-        browser.element('.v-field__input').press_tab()
+    def clear_search(self):
+        browser.element('.v-field__input').send_keys(Keys.LEFT_CONTROL, 'A', Keys.BACKSPACE)
+        browser.all('.image').wait_until(be.visible)
         return self
 
     def check_dish(self, dish: Dish):

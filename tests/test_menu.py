@@ -1,5 +1,3 @@
-import time
-
 import allure
 import pytest
 from selene import browser
@@ -31,7 +29,7 @@ class TestsMenuScreen:
         with allure.step('Search for a dish in alcohol menu'):
             initial_count_of_alcohol_positions = application.menu_page.calculate_item_count()
             application.menu_page.check_filtering('бутылочное')
-            application.menu_page.clear_search('бутылочное')
+            application.menu_page.clear_search()
         with allure.step('Check that initial count of dishes is back'):
             count_of_alcohol_positions_after_filter_clear = application.menu_page.calculate_item_count()
             assert initial_count_of_alcohol_positions == count_of_alcohol_positions_after_filter_clear
@@ -68,12 +66,12 @@ class TestsMenuScreen:
             application.menu_page.add_to_cart(meat_dish)
             new_order.check_amount(new_order.calculate_amount(meat_dish))
         with allure.step('Add dish 2 to cart and check total amount of 2'):
-            application.menu_page.clear_search(meat_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(soup_dish.name)
             application.menu_page.add_to_cart(soup_dish)
             new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish))
         with allure.step('Add dish 3 to cart and check total amount of 2'):
-            application.menu_page.clear_search(soup_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(fish_dish.name)
             application.menu_page.add_to_cart(fish_dish, 3)
             new_order.check_amount(new_order.calculate_amount(meat_dish, soup_dish, fish_dish))
@@ -102,7 +100,7 @@ class TestsMenuScreen:
             application.menu_page.add_in_card(meat_dish)
             new_order.check_amount(new_order.calculate_amount(meat_dish))
         with allure.step('Add 3 pieces of dish 2 from card and check total amount'):
-            application.menu_page.clear_search(meat_dish.name)
+            application.menu_page.clear_search()
             application.menu_page.search_for_a_dish(fish_dish.name)
             application.menu_page.open_dish_card(fish_dish)
             application.menu_page.add_in_card(fish_dish, 4)
