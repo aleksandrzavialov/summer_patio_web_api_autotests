@@ -93,5 +93,5 @@ class Cart:
 
     def return_to_menu_from_empty_cart(self):
         browser.element('.btn-back').click()
-        browser.all('.tab-link').should(have.size_greater_than(0))
+        browser.all('.tab-link').wait_until(have.size_greater_than(0))
         browser.all('.row-list').should(have.size_greater_than(0))
