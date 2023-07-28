@@ -5,7 +5,7 @@ from summerpatio_web_autotests.data.devices import DeviceInfo
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FFOptions
 from selene.support.shared import browser
-from utils.allure import attach
+from summerpatio_web_autotests.utils.allure import attach
 from selenium import webdriver
 import project
 
