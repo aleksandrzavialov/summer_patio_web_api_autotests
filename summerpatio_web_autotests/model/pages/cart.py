@@ -1,4 +1,3 @@
-import time
 from selene.support.shared import browser
 from selene import be, have
 from summerpatio_web_autotests.model.components.dish import Dish
